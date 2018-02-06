@@ -6,6 +6,12 @@ let request = require('supertest-as-promised');
 let app = require('../../app');
 let _user = 'integration_test_' + Math.floor(Date.now() / 1000) + '@alttab.co';
 
+before(done => {
+  app.on('connected', function() {
+    done();
+  });
+});
+
 describe('Authentication Controller', () => {
 
   it('should register a new user and return token', () => {
